@@ -13,7 +13,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
-
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
 
 
@@ -27,6 +30,13 @@ public abstract class Bag {
      * its contents.)
      */
 
+    public Bag(String colour, int capacity){
+        this.color = colour;
+        this.capacity = capacity;
+
+        contents = new String[capacity];
+    }
+
 
 
 
@@ -37,7 +47,15 @@ public abstract class Bag {
      *           - getNumberOfContents
      *           - getCapacity
      */
-
+    public String getColor(){
+        return color;
+    }
+    public int getNumberOfContents(){
+        return numberOfContents;
+    }
+    public int getCapacity(){
+        return capacity;
+    }
 
 
 
@@ -45,7 +63,9 @@ public abstract class Bag {
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
-
+    public void setColor(String color){
+        this.color = color;
+    }
 
 
 
@@ -60,6 +80,16 @@ public abstract class Bag {
      *       This method should return true if the item was added
      *       and false otherwise.
      */
+    public boolean addItem(String item){
+        if (numberOfContents < capacity){
+            contents[numberOfContents] = item;
+
+            numberOfContents++;
+
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -75,6 +105,17 @@ public abstract class Bag {
      *
      * @return
      */
+    public String popItem(){
+        if (numberOfContents == 0){
+            return null;
+        }
+
+        numberOfContents--;
+        String item = contents[numberOfContents];
+        contents[numberOfContents] = "";
+
+        return item;
+    }
 
 
 
@@ -87,7 +128,14 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
+        String[] newBag = new String[capacity + n];
 
+        for (int i = 0; i < numberOfContents; i++){
+            newBag[i] = contents[i];
+        }
+
+        contents = newBag;
+        capacity += n;
     }
 
     /**
